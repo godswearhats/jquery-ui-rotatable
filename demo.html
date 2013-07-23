@@ -1,0 +1,29 @@
+<html>
+<head>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	
+	<script src="jquery.ui.rotatable.js"></script>
+	<link rel="stylesheet" href="jquery.ui.rotatable.css">
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#target').rotatable();
+			$('#target2').draggable().rotatable();
+			$('#target3').resizable().draggable().rotatable();
+		});
+	</script>
+</head>
+<body>
+<div id="target" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px">
+  Rotate me!
+</div>
+<div id="target2" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px">
+  Drag me and rotate me!
+</div>
+<div id="target3" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px">
+  Drag me, resize me and rotate me!
+</div>
+</body>
+</html>

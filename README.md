@@ -1,4 +1,4 @@
-jquery-ui-rotatable is a plugin for jQuery UI that works in a similar way to Draggable and Resizable, without being as full-featured (please fork and send me pull requests!). By default, it puts a small rotation icon in the bottom left of whatever element you want to make rotatable. I chose that area because it was originally being used in [Herald](/godswearhats/herald) and the elements in that project were also resizable and I didn't want to interfere with the bottom/right controls for that.
+jquery-ui-rotatable is a plugin for jQuery UI that works in a similar way to Draggable and Resizable, without being as full-featured (please fork and send me pull requests!). By default, it puts a small rotation icon in the bottom left of whatever element you want to make rotatable. I chose that area because it was originally being used in [Herald](https://github.com/godswearhats/herald) and the elements in that project were also resizable and I didn't want to interfere with the bottom/right controls for that.
 
 ### Usage
 
@@ -16,12 +16,16 @@ Somewhere in your HTML ...
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#target').rotatable();
-		}
+		});
 	</script>
 	
 	<div id="target">Rotate me!</div>
 	
 Note that you should probably define a height and width for anything that you make rotatable, as the rotation happens around the center point of the element, and when you don't define these things, it could look and feel a little a strange.
+
+### Demo
+
+A simple demo is in the source code, but can be visited [here](http://godswearhats.com/jquery-ui-rotatable/demo.html).
 
 ### Shortcomings
 
