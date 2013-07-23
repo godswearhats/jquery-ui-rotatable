@@ -10,7 +10,8 @@ Somewhere in your HTML ...
 	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 	
 	<script src="jquery.ui.rotatable.js"></script>
-	<link rel="stylesheet" href="jquery.ui.rotatable.css"><!-- this is small and will allow you to override look/feel of handle -->
+	<!-- this is small and will allow you to override look/feel of handle -->
+	<link rel="stylesheet" href="jquery.ui.rotatable.css">
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
