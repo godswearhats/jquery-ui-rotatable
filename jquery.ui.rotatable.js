@@ -14,12 +14,14 @@ $.widget("ui.rotatable", $.ui.mouse, {
 	},
 	
 	_create: function() {
-		var handle = $(document.createElement('div'));
+		if (this.options.handle === undefined) {
+			this.options.handle = $(document.createElement('div'));
+		}
+		var handle = this.options.handle;
 		handle.addClass('ui-rotatable-handle');
 		handle.draggable({ helper: 'clone', start: dragStart });
 		handle.on('mousedown', startRotate);
 		handle.appendTo(this.element);
-		this.options.handle = handle;
 		this.element.data('angle', 0);
 	}
 });
