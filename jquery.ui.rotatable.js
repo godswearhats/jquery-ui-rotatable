@@ -14,7 +14,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
 	},
 	
 	_create: function() {
-		if (this.options.handle === undefined) {
+		if (!this.options.handle) {
 			this.options.handle = $(document.createElement('div'));
 		}
 		var handle = this.options.handle;
