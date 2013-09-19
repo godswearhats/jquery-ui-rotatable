@@ -9,9 +9,20 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#target').rotatable();
-			$('#target2').draggable().rotatable();
-			$('#target3').resizable().draggable().rotatable();
+      var params = {
+        start: function(event, ui) {
+          console.log("Rotating started: " + JSON.stringify(ui));
+        },
+        rotate: function(event, ui) {
+          console.log("Rotating: " + JSON.stringify(ui));
+        },
+        stop: function(event, ui) {
+          console.log("Rotating stopped: " + JSON.stringify(ui));
+        },
+      };
+			$('#target').rotatable(params);
+			$('#target2').draggable().rotatable(params);
+			$('#target3').resizable().draggable().rotatable(params);
 		});
 	</script>
 </head>

@@ -15,12 +15,30 @@ Somewhere in your HTML ...
 	
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#target').rotatable();
+      var params = {
+        // Callback fired on rotation start.
+        start: function(event, ui) {
+        },
+        // Callback fired during rotation.
+        rotate: function(event, ui) {
+        },
+        // Callback fired on rotation end.
+        stop: function(event, ui) {
+        },
+      };
+			$('#target').rotatable(params);
 		});
 	</script>
 	
 	<div id="target">Rotate me!</div>
-	
+
+The start, rotate and stop callbacks provide the following in the ui argument of the callback:
+ * element: The jQuery element being rotated.
+ * angle: An object containing information about the rotation angle, with the following keys:
+  * start: The angle at the begining of the rotation.
+  * current: The current angle of the rotation.
+  * stop: The angle at the end of the rotation.
+
 Note that you should probably define a height and width for anything that you make rotatable, as the rotation happens around the center point of the element, and when you don't define these things, it could look and feel a little a strange.
 
 ### Demo
