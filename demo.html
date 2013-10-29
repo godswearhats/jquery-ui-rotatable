@@ -23,6 +23,8 @@
 			$('#target').rotatable(params);
 			$('#target2').draggable().rotatable(params);
 			$('#target3').resizable().draggable().rotatable(params);
+      $('#target4').rotatable( {angle: 0.1} );
+      $('#target5').rotatable( {handle: $(document.createElement('img')).attr('src', 'alternate_rotate.png')} );
 		});
 	</script>
 </head>
@@ -35,6 +37,12 @@
 </div>
 <div id="target3" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px">
   Drag me, resize me and rotate me!
+</div>
+<div id="target4" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
+  I start rotated.
+</div>
+<div id="target5" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
+  I've got a custom handle.
 </div>
 </body>
 </html>

@@ -4,6 +4,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
 
   options: {
     handle: false,
+    angle: false,
 
     // callbacks
     start: null,
@@ -18,9 +19,22 @@ $.widget("ui.rotatable", $.ui.mouse, {
     this.options.handle = handle;
   },
 
+  angle: function(angle) {
+    if (angle === undefined) {
+      return this.options.angle;
+    }
+    this.options.angle = angle;
+    this.performRotation(this.options.angle);
+  },
+
   _create: function() {
+    var handle;
     if (!this.options.handle) {
-      this.options.handle = $(document.createElement('div'));
+      handle = $(document.createElement('div'));
+      handle.addClass('ui-rotatable-handle');
+    }
+    else {
+      handle = this.options.handle;
     }
 
     this.listeners = {
@@ -29,12 +43,22 @@ $.widget("ui.rotatable", $.ui.mouse, {
       stopRotate: $.proxy(this.stopRotate, this),
     };
 
-    var handle = this.options.handle;
     handle.addClass('ui-rotatable-handle');
     handle.draggable({ helper: 'clone', start: this.dragStart });
     handle.bind('mousedown', this.listeners.startRotate);
     handle.appendTo(this.element);
-    this.elementCurrentAngle = 0;
+    if(this.options.angle != false) {
+      this.elementCurrentAngle = this.options.angle;
+      performRotation(this.elementCurrentAngle);
+    }
+    else {
+      this.elementCurrentAngle = 0;
+    }
+  },
+
+  _destroy: function() {
+    this.element.removeClass('ui-rotatable');
+    this.element.find('.ui-rotatable-handle').remove();
   },
 
   performRotation: function(angle) {
