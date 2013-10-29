@@ -3,7 +3,8 @@
 $.widget("ui.rotatable", $.ui.mouse, {
 	
 	options: {
-		handle: false
+		handle: false,
+        angle: 0
 	},
 	
 	handle: function(handle) {
@@ -12,17 +13,29 @@ $.widget("ui.rotatable", $.ui.mouse, {
 		}
 		this.options.handle = handle;
 	},
+    
+    angle: function(angle) {
+		if (angle === undefined) {
+			return this.options.angle;
+		}
+		this.options.angle = angle;
+        performRotation(this.element, this.options.angle);
+    },
 	
 	_create: function() {
+        var handle;
 		if (!this.options.handle) {
-			this.options.handle = $(document.createElement('div'));
+			handle = $(document.createElement('div'));
+    		handle.addClass('ui-rotatable-handle');
 		}
-		var handle = this.options.handle;
-		handle.addClass('ui-rotatable-handle');
+        else {
+            handle = this.options.handle;
+        }
 		handle.draggable({ helper: 'clone', start: dragStart });
 		handle.on('mousedown', startRotate);
 		handle.appendTo(this.element);
-		this.element.data('angle', 0);
+		this.element.data('angle', this.options.angle);
+        performRotation(this.element, this.options.angle);
 	}
 });
 
