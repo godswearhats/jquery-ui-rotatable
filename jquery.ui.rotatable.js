@@ -4,7 +4,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
 	
 	options: {
 		handle: false,
-        angle: 0
+        angle: false
 	},
 	
 	handle: function(handle) {
@@ -34,9 +34,17 @@ $.widget("ui.rotatable", $.ui.mouse, {
 		handle.draggable({ helper: 'clone', start: dragStart });
 		handle.on('mousedown', startRotate);
 		handle.appendTo(this.element);
-		this.element.data('angle', this.options.angle);
-        performRotation(this.element, this.options.angle);
-	}
+        if(this.options.angle != false)
+        {
+            this.element.data('angle', this.options.angle);
+            performRotation(this.element, this.options.angle);
+        }
+	},
+
+    _destroy: function() {
+        this.element.removeClass('ui-rotatable');
+        this.element.find('.ui-rotatable-handle').remove();
+    }
 });
 
 var elementBeingRotated, mouseStartAngle, elementStartAngle;
