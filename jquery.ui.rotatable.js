@@ -49,7 +49,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
     handle.appendTo(this.element);
     if(this.options.angle != false) {
       this.elementCurrentAngle = this.options.angle;
-      performRotation(this.elementCurrentAngle);
+      this.performRotation(this.elementCurrentAngle);
     }
     else {
       this.elementCurrentAngle = 0;
