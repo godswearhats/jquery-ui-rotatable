@@ -4,32 +4,34 @@ jquery-ui-rotatable is a plugin for jQuery UI that works in a similar way to Dra
 
 Somewhere in your HTML ...
 
-	<!-- prerequisites -->
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-	
-	<script src="jquery.ui.rotatable.js"></script>
-	<!-- this is small and will allow you to override look/feel of handle -->
-	<link rel="stylesheet" href="jquery.ui.rotatable.css">
-	
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#target').rotatable();
-		});
-	</script>
-	
-	<div id="target">Rotate me!</div>
-	
+    <!-- prerequisites -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    
+    <script src="jquery.ui.rotatable.js"></script>
+    <!-- this is small and will allow you to override look/feel of handle -->
+    <link rel="stylesheet" href="jquery.ui.rotatable.css">
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#target').rotatable();
+        });
+    </script>
+    
+    <div id="target">Rotate me!</div>
+    
 Note that you should probably define a height and width for anything that you make rotatable, as the rotation happens around the center point of the element, and when you don't define these things, it could look and feel a little a strange.
+
+You can also combine this plugin with the built-in `resizable()` and `draggable()`, although the latter works best when applied to a container with the rotatable inside it. See the Demo page for some examples.
 
 ### Demo
 
 A simple demo is in the source code, but can be visited [here](http://godswearhats.com/jquery-ui-rotatable/demo.html).
 
-### Shortcomings
+### Thanks
 
-This has not been well tested or well documented. My hope is that other people will use it and then either submit patches or ask for fixes. Maybe I'll have enough time to try to get it merged with the actual jQuery UI, but I'm not sure I'd have the bandwidth to do this on my own.
+Many thanks to those of you who have reported issues and helped me diagnose and fix them!
 
 ### License
 
