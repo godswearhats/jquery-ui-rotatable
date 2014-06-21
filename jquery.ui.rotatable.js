@@ -1,27 +1,32 @@
 (function( $, undefined ) {
-        
+
 $.widget("ui.rotatable", $.ui.mouse, {
-    
+
     options: {
         handle: false,
-        angle: 0
+        angle: false,
+
+        // callbacks
+        start: null,
+        rotate: null,
+        stop: null
     },
-    
+
     handle: function(handle) {
         if (handle === undefined) {
             return this.options.handle;
         }
         this.options.handle = handle;
     },
-    
+
     angle: function(angle) {
         if (angle === undefined) {
             return this.options.angle;
         }
         this.options.angle = angle;
-        performRotation(this.element, this.options.angle);
+        this.performRotation(this.options.angle);
     },
-    
+
     _create: function() {
         var handle;
         if (!this.options.handle) {
@@ -31,80 +36,136 @@ $.widget("ui.rotatable", $.ui.mouse, {
         else {
             handle = this.options.handle;
         }
-        handle.draggable({ helper: 'clone', start: dragStart });
-        handle.on('mousedown', startRotate);
+
+        this.listeners = {
+            rotateElement: $.proxy(this.rotateElement, this),
+            startRotate: $.proxy(this.startRotate, this),
+            stopRotate: $.proxy(this.stopRotate, this)
+        };
+
+        handle.draggable({ helper: 'clone', start: this.dragStart, handle: handle });
+        handle.bind('mousedown', this.listeners.startRotate);
         handle.appendTo(this.element);
-        this.element.data('angle', this.options.angle);
-        performRotation(this.element, this.options.angle);
+        
+        if(this.options.angle != false) {
+            this.elementCurrentAngle = this.options.angle;
+            this.performRotation(this.elementCurrentAngle);
+        }
+        else {
+            this.elementCurrentAngle = 0;
+        }
     },
 
     _destroy: function() {
         this.element.removeClass('ui-rotatable');
         this.element.find('.ui-rotatable-handle').remove();
+    },
+
+    performRotation: function(angle) {
+        this.element.css('transform','rotate(' + angle + 'rad)');
+        this.element.css('-moz-transform','rotate(' + angle + 'rad)');
+        this.element.css('-webkit-transform','rotate(' + angle + 'rad)');
+        this.element.css('-o-transform','rotate(' + angle + 'rad)');
+    },
+
+    getElementOffset: function() {
+        this.performRotation(0);
+        var offset = this.element.offset();
+        this.performRotation(this.elementCurrentAngle);
+        return offset;
+    },
+
+    getElementCenter: function() {
+        var elementOffset = this.getElementOffset();
+        var elementCentreX = elementOffset.left + this.element.width() / 2;
+        var elementCentreY = elementOffset.top + this.element.height() / 2;
+        return Array(elementCentreX, elementCentreY);
+    },
+
+    dragStart: function(event) {
+        if (this.element) {
+            return false;
+        }
+    },
+
+    startRotate: function(event) {
+        var center = this.getElementCenter();
+        var startXFromCenter = event.pageX - center[0];
+        var startYFromCenter = event.pageY - center[1];
+        this.mouseStartAngle = Math.atan2(startYFromCenter, startXFromCenter);
+        this.elementStartAngle = this.elementCurrentAngle;
+        this.hasRotated = false;
+
+        this._propagate("start", event);
+
+        $(document).bind('mousemove', this.listeners.rotateElement);
+        $(document).bind('mouseup', this.listeners.stopRotate);
+
+        return false;
+    },
+
+    rotateElement: function(event) {
+        if (!this.element) {
+            return false;
+        }
+        
+        var center = this.getElementCenter();
+        
+        var xFromCenter = event.pageX - center[0];
+        var yFromCenter = event.pageY - center[1];
+        var mouseAngle = Math.atan2(yFromCenter, xFromCenter);
+        var rotateAngle = mouseAngle - this.mouseStartAngle + this.elementStartAngle;
+
+        this.performRotation(rotateAngle);
+        var previousRotateAngle = this.elementCurrentAngle;
+        this.elementCurrentAngle = rotateAngle;
+
+        // Plugins callbacks need to be called first.
+        this._propagate("rotate", event);
+
+        if (previousRotateAngle != rotateAngle) {
+            this._trigger("rotate", event, this.ui());
+            this.hasRotated = true;
+        }
+
+        return false;
+    },
+
+    stopRotate: function(event) {
+        if (!this.element) {
+            return;
+        }
+
+        $(document).unbind('mousemove', this.listeners.rotateElement);
+        $(document).unbind('mouseup', this.listeners.stopRotate);
+
+        this.elementStopAngle = this.elementCurrentAngle;
+        if (this.hasRotated) {
+            this._propagate("stop", event);
+        }
+
+        setTimeout( function() { this.element = false; }, 10 );
+        return false;
+    },
+
+    _propagate: function(n, event) {
+        $.ui.plugin.call(this, n, [event, this.ui()]);
+        (n !== "rotate" && this._trigger(n, event, this.ui()));
+    },
+
+    plugins: {},
+
+    ui: function() {
+        return {
+            element: this.element,
+            angle: {
+                start: this.elementStartAngle,
+                current: this.elementCurrentAngle,
+                stop: this.elementStopAngle
+            }
+        };
     }
+
 });
-
-var elementBeingRotated, mouseStartAngle, elementStartAngle;
-$(document).on('mouseup', stopRotate);
-
-function getElementCenter(el) {
-    var elementOffset = getElementOffset(el);
-    var elementCentreX = elementOffset.left + el.width() / 2;
-    var elementCentreY = elementOffset.top + el.height() / 2;
-    return Array(elementCentreX, elementCentreY);
-};
-
-function getElementOffset(el) {
-    performRotation(el, 0);
-    var offset = el.offset();
-    performRotation(el, el.data('angle'));
-    return offset;
-};
-
-function performRotation(el, angle) {
-    el.css('transform','rotate(' + angle + 'rad)');
-    el.css('-moz-transform','rotate(' + angle + 'rad)');
-    el.css('-webkit-transform','rotate(' + angle + 'rad)');
-    el.css('-o-transform','rotate(' + angle + 'rad)');
-};
-
-function dragStart(event) {
-    if (elementBeingRotated) return false;
-};
-
-function rotateElement(event) {
-    if (!elementBeingRotated) return false;
-
-    var center = getElementCenter(elementBeingRotated);
-    var xFromCenter = event.pageX - center[0];
-    var yFromCenter = event.pageY - center[1];
-    var mouseAngle = Math.atan2(yFromCenter, xFromCenter);
-    var rotateAngle = mouseAngle - mouseStartAngle + elementStartAngle;
-    
-    performRotation(elementBeingRotated, rotateAngle);
-    elementBeingRotated.data('angle', rotateAngle);
-    
-    return false;
-};
-
-function startRotate(event) {
-    elementBeingRotated = $(this).parent(); 
-    var center = getElementCenter(elementBeingRotated);
-    var startXFromCenter = event.pageX - center[0];
-    var startYFromCenter = event.pageY - center[1];
-    mouseStartAngle = Math.atan2(startYFromCenter, startXFromCenter);
-    elementStartAngle = elementBeingRotated.data('angle');
-
-    $(document).on('mousemove', rotateElement);
-    
-    return false;
-};
-
-function stopRotate(event) {
-    if (!elementBeingRotated) return;
-    $(document).unbind('mousemove');
-    setTimeout( function() { elementBeingRotated = false; }, 10 );
-    return false;
-};
 
 })(jQuery);

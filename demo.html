@@ -1,21 +1,32 @@
 <html>
 <head>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    
-    <script src="jquery.ui.rotatable.js"></script>
-    <link rel="stylesheet" href="jquery.ui.rotatable.css">
-    
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#target').rotatable();
-            $('#target2').rotatable(); $('#draggable2').draggable();
-            $('#target3').resizable().rotatable(); $('#draggable3').draggable();
-            $('#target4').rotatable( {angle: 0.1} );
-            $('#target5').rotatable( {handle: $(document.createElement('img')).attr('src', 'alternate_rotate.png')} );
-        });
-    </script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	
+	<script src="jquery.ui.rotatable.min.js"></script>
+	<link rel="stylesheet" href="jquery.ui.rotatable.css">
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+        var params = {
+            start: function(event, ui) {
+                console.log("Rotating started");
+            },
+            rotate: function(event, ui) {
+                console.log("Rotating");
+            },
+            stop: function(event, ui) {
+                console.log("Rotating stopped");
+            },
+        };
+        $('#target').rotatable(params);
+        $('#target2').rotatable(params); $('#draggable2').draggable();
+        $('#target3').resizable().rotatable(params); $('#draggable3').draggable();
+        $('#target4').rotatable( {angle: 0.1} );
+        $('#target5').rotatable( {handle: $(document.createElement('img')).attr('src', 'alternate_rotate.png')} );
+		});
+	</script>
 </head>
 <body>
 <div id="target" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px">
