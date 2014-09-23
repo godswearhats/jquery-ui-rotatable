@@ -43,6 +43,8 @@ Note that you should probably define a height and width for anything that you ma
 
 You can also combine this plugin with the built-in `resizable()` and `draggable()`, although the latter works best when applied to a container with the rotatable inside it. See the Demo page for some examples.
 
+You can disable/enable the rotation using `$('#target').rotatable('enable');` and `$('#target').rotatable('disable');`.
+
 ### Demo
 
 A simple demo is in the source code, but can be visited [here](http://godswearhats.com/jquery-ui-rotatable/demo.html).
