@@ -105,7 +105,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
     },
 
     rotateElement: function(event) {
-        if (!this.element) {
+        if (!this.element || this.element.disabled) {
             return false;
         }
         
@@ -132,7 +132,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
     },
 
     stopRotate: function(event) {
-        if (!this.element) {
+        if (!this.element || this.element.disabled) {
             return;
         }
 
