@@ -82,6 +82,30 @@ $.widget("ui.rotatable", $.ui.mouse, {
         return Array(elementCentreX, elementCentreY);
     },
 
+    getPredefinedAngle: function(rotateAngle){
+        var deg = rotateAngle * (180/Math.PI);
+        
+        if(deg <= -22.5 && deg > -67.5){
+            deg = -45;
+        }else if(deg <= -67.5 || deg > 247.5){
+            deg = -89.999;
+        }else if(deg <= 247.5 && deg > 202.5){
+            deg = 225;
+        }else if(deg <= 202.5 && deg > 157.5){
+            deg = 179.999;
+        }else if(deg <= 157.5 && deg > 112.5){
+            deg = 135;
+        }else if(deg <= 112.5 && deg > 67.5){
+            deg = 89.999;
+        }else if(deg <= 67.5 && deg > 22.5){
+            deg = 45;
+        }else if(deg <= 22.5 && deg > -22.5){
+            deg = 0;
+        };
+        return deg / (180/Math.PI);
+
+    },
+
     dragStart: function(event) {
         if (this.element) {
             return false;
@@ -115,7 +139,10 @@ $.widget("ui.rotatable", $.ui.mouse, {
         var yFromCenter = event.pageY - center[1];
         var mouseAngle = Math.atan2(yFromCenter, xFromCenter);
         var rotateAngle = mouseAngle - this.mouseStartAngle + this.elementStartAngle;
-
+        
+        if(event.shiftKey)
+            rotateAngle = this.getPredefinedAngle(rotateAngle);
+        
         this.performRotation(rotateAngle);
         var previousRotateAngle = this.elementCurrentAngle;
         this.elementCurrentAngle = rotateAngle;
