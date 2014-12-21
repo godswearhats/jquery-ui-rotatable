@@ -115,6 +115,14 @@ $.widget("ui.rotatable", $.ui.mouse, {
         var yFromCenter = event.pageY - center[1];
         var mouseAngle = Math.atan2(yFromCenter, xFromCenter);
         var rotateAngle = mouseAngle - this.mouseStartAngle + this.elementStartAngle;
+        
+        if (event.shiftKey) {
+            //15deg is a common value, but this could be an option
+			var predefinedAngle = 15 / 180 * Math.PI;
+			if (rotateAngle < 0)
+				predefinedAngle *= -1;
+			rotateAngle -= (rotateAngle + predefinedAngle / 2) % (predefinedAngle) - predefinedAngle / 2;
+		}
 
         this.performRotation(rotateAngle);
         var previousRotateAngle = this.elementCurrentAngle;
