@@ -45,13 +45,15 @@ You can also combine this plugin with the built-in `resizable()` and `draggable(
 
 You can disable/enable the rotation using `$('#target').rotatable('enable');` and `$('#target').rotatable('disable');`.
 
+Holding down the shift key while rotating will allow rotation at in 15 degree increments.
+
 ### Demo
 
 A simple demo is in the source code, but can be visited [here](http://godswearhats.com/jquery-ui-rotatable/demo.html).
 
 ### Thanks
 
-Many thanks to those of you who have reported issues and helped me diagnose and fix them!
+Many thanks to those of you who have reported issues and helped me diagnose and fix them! Specifically, @thehunmonkgroup, @ssimono, @theodorton and @rouxguigui
 
 ### License
 
