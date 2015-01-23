@@ -24,6 +24,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
             return this.options.angle;
         }
         this.options.angle = angle;
+        this.elementCurrentAngle = angle;
         this.performRotation(this.options.angle);
     },
 
