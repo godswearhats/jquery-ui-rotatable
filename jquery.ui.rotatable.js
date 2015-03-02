@@ -41,10 +41,14 @@ $.widget("ui.rotatable", $.ui.mouse, {
         this.listeners = {
             rotateElement: $.proxy(this.rotateElement, this),
             startRotate: $.proxy(this.startRotate, this),
-            stopRotate: $.proxy(this.stopRotate, this)
+            stopRotate: $.proxy(this.stopRotate, this),
+			wheelRotate: $.proxy(this.wheelRotate,this)
         };
 
-        handle.draggable({ helper: 'clone', start: this.dragStart, handle: handle });
+		this.element.bind('wheel', this.listeners.wheelRotate);
+
+
+		handle.draggable({ helper: 'clone', start: this.dragStart, handle: handle });
         handle.bind('mousedown', this.listeners.startRotate);
         handle.appendTo(this.element);
         
@@ -156,6 +160,13 @@ $.widget("ui.rotatable", $.ui.mouse, {
         setTimeout( function() { this.element = false; }, 10 );
         return false;
     },
+	wheelRotate:function(event){
+		var angle=Math.round(event.originalEvent.deltaY/10)*Math.PI/180;
+		angle=this.elementCurrentAngle+angle;
+		this.angle(angle);
+		this._trigger("rotate", event, this.ui());
+
+	},
 
     _propagate: function(n, event) {
         $.ui.plugin.call(this, n, [event, this.ui()]);
@@ -166,6 +177,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
 
     ui: function() {
         return {
+			api:this,
             element: this.element,
             angle: {
                 start: this.elementStartAngle,
