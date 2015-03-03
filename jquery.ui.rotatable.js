@@ -42,11 +42,10 @@ $.widget("ui.rotatable", $.ui.mouse, {
             rotateElement: $.proxy(this.rotateElement, this),
             startRotate: $.proxy(this.startRotate, this),
             stopRotate: $.proxy(this.stopRotate, this),
-			wheelRotate: $.proxy(this.wheelRotate,this)
+			wheelRotate: $.proxy(this.wheelRotate, this)
         };
 
 		this.element.bind('wheel', this.listeners.wheelRotate);
-
 
 		handle.draggable({ helper: 'clone', start: this.dragStart, handle: handle });
         handle.bind('mousedown', this.listeners.startRotate);
@@ -122,7 +121,6 @@ $.widget("ui.rotatable", $.ui.mouse, {
         var rotateAngle = mouseAngle - this.mouseStartAngle + this.elementStartAngle;
         
         if (event.shiftKey) {
-            //15deg is a common value, but this could be an option
 			var predefinedAngle = 15 / 180 * Math.PI;
 			if (rotateAngle < 0)
 				predefinedAngle *= -1;
@@ -133,7 +131,6 @@ $.widget("ui.rotatable", $.ui.mouse, {
         var previousRotateAngle = this.elementCurrentAngle;
         this.elementCurrentAngle = rotateAngle;
 
-        // Plugins callbacks need to be called first.
         this._propagate("rotate", event);
 
         if (previousRotateAngle != rotateAngle) {
@@ -160,12 +157,12 @@ $.widget("ui.rotatable", $.ui.mouse, {
         setTimeout( function() { this.element = false; }, 10 );
         return false;
     },
-	wheelRotate:function(event){
-		var angle=Math.round(event.originalEvent.deltaY/10)*Math.PI/180;
-		angle=this.elementCurrentAngle+angle;
+	
+	wheelRotate: function(event) {
+		var angle = Math.round(event.originalEvent.deltaY/10) * Math.PI/180;
+		angle = this.elementCurrentAngle + angle;
 		this.angle(angle);
 		this._trigger("rotate", event, this.ui());
-
 	},
 
     _propagate: function(n, event) {

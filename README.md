@@ -33,8 +33,8 @@ Somewhere in your HTML ...
     <div id="target">Rotate me!</div>
 
 The start, rotate and stop callbacks provide the following in the ui argument of the callback:
-* element: The jQuery element being rotated.
-* angle: An object containing information about the rotation angle, with the following keys:
+	* element: The jQuery element being rotated.
+	* angle: An object containing information about the rotation angle, with the following keys:
     * start: The angle at the begining of the rotation.
     * current: The current angle of the rotation.
     * stop: The angle at the end of the rotation.
@@ -45,7 +45,7 @@ You can also combine this plugin with the built-in `resizable()` and `draggable(
 
 You can disable/enable the rotation using `$('#target').rotatable('enable');` and `$('#target').rotatable('disable');`.
 
-Holding down the shift key while rotating will allow rotation at in 15 degree increments.
+Holding down the shift key while rotating will allow rotation at in 15 degree increments. Hovering over an element and rotating the scrollwheel (or equivalent) will cause the element to rotate.
 
 ### Demo
 
@@ -53,7 +53,7 @@ A simple demo is in the source code, but can be visited [here](http://godswearha
 
 ### Thanks
 
-Many thanks to those of you who have reported issues and helped me diagnose and fix them! Specifically, @thehunmonkgroup, @ssimono, @theodorton and @rouxguigui
+Many thanks to those of you who have reported issues and helped me diagnose and fix them! Specifically, @thehunmonkgroup, @ssimono, @theodorton, @rouxguigui and @tremez
 
 ### License
 
