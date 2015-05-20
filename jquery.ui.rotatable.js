@@ -63,6 +63,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
     _destroy: function() {
         this.element.removeClass('ui-rotatable');
         this.element.find('.ui-rotatable-handle').remove();
+        this.element.unbind('wheel', this.listeners.wheelRotate);
     },
 
     performRotation: function(angle) {
