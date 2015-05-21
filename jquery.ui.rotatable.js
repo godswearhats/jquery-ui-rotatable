@@ -6,7 +6,6 @@ $.widget("ui.rotatable", $.ui.mouse, {
         handle: false,
         angle: false,
         
-        /* Added by Jon Lennryd 20150102 */
         rotationCenterX: false, 
         rotationCenterY: false,
 
@@ -16,7 +15,6 @@ $.widget("ui.rotatable", $.ui.mouse, {
         stop: null
     },
 
-    /* Added by Jon Lennryd 20150102 */
     rotationCenterX: function(x) {
         if (x === undefined) {
             return this.options.rotationCenterX;
@@ -24,7 +22,6 @@ $.widget("ui.rotatable", $.ui.mouse, {
         this.options.rotationCenterX = x;
     },
 
-    /* Added by Jon Lennryd 20150102 */
     rotationCenterY: function(y) {
         if (y === undefined) {
             return this.options.rotationCenterY;
@@ -82,7 +79,6 @@ $.widget("ui.rotatable", $.ui.mouse, {
     },
 
     performRotation: function(angle) {
-        /* Added by Jon Lennryd 20150102 */
         this.element.css('transform-origin', this.options.rotationCenterX + '% ' + this.options.rotationCenterY + '%');
         this.element.css('-ms-transform-origin', this.options.rotationCenterX + '% ' + this.options.rotationCenterY + '%'); /* IE 9 */
         this.element.css(
@@ -112,7 +108,6 @@ $.widget("ui.rotatable", $.ui.mouse, {
       }
       else
       {
-        /* Added by Jon Lennryd 20150102 */
         var elementCentreX = elementOffset.left + (this.element.width() / 100) * this.options.rotationCenterX;
         var elementCentreY = elementOffset.top + (this.element.height() / 100) * this.options.rotationCenterY;
       }
