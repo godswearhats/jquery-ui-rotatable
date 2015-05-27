@@ -5,6 +5,9 @@ $.widget("ui.rotatable", $.ui.mouse, {
     options: {
         handle: false,
         angle: false,
+        
+        rotationCenterX: false, 
+        rotationCenterY: false,
 
         // callbacks
         start: null,
@@ -12,6 +15,20 @@ $.widget("ui.rotatable", $.ui.mouse, {
         stop: null
     },
 
+    rotationCenterX: function(x) {
+        if (x === undefined) {
+            return this.options.rotationCenterX;
+        }
+        this.options.rotationCenterX = x;
+    },
+
+    rotationCenterY: function(y) {
+        if (y === undefined) {
+            return this.options.rotationCenterY;
+        }
+        this.options.rotationCenterY = y;
+    },
+    
     handle: function(handle) {
         if (handle === undefined) {
             return this.options.handle;
@@ -67,6 +84,12 @@ $.widget("ui.rotatable", $.ui.mouse, {
     },
 
     performRotation: function(angle) {
+        this.element.css('transform-origin', this.options.rotationCenterX + '% ' + this.options.rotationCenterY + '%');
+        this.element.css('-ms-transform-origin', this.options.rotationCenterX + '% ' + this.options.rotationCenterY + '%'); /* IE 9 */
+        this.element.css(
+          '-webkit-transform-origin', 
+          this.options.rotationCenterX + '% ' + this.options.rotationCenterY + '%'); /* Chrome, Safari, Opera */
+          
         this.element.css('transform','rotate(' + angle + 'rad)');
         this.element.css('-moz-transform','rotate(' + angle + 'rad)');
         this.element.css('-webkit-transform','rotate(' + angle + 'rad)');
@@ -81,10 +104,20 @@ $.widget("ui.rotatable", $.ui.mouse, {
     },
 
     getElementCenter: function() {
-        var elementOffset = this.getElementOffset();
+      var elementOffset = this.getElementOffset();
+
+      if(this.options.rotationCenterX === false)
+      {
         var elementCentreX = elementOffset.left + this.element.width() / 2;
         var elementCentreY = elementOffset.top + this.element.height() / 2;
-        return Array(elementCentreX, elementCentreY);
+      }
+      else
+      {
+        var elementCentreX = elementOffset.left + (this.element.width() / 100) * this.options.rotationCenterX;
+        var elementCentreY = elementOffset.top + (this.element.height() / 100) * this.options.rotationCenterY;
+      }
+      
+      return Array(elementCentreX, elementCentreY);
     },
 
     dragStart: function(event) {
