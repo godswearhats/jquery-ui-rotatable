@@ -196,7 +196,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
         if( this.options.snap ){
 
             //convert radians to degrees
-            var rotateDegrees = ( ( rotateAngle / Math.PI ) * 180 ) + 180;
+            var rotateDegrees = ( ( rotateAngle / Math.PI ) * 180 );
 
             //round to nearest step
             rotateDegrees = Math.round( rotateDegrees / this.options.steps ) * this.options.steps;
