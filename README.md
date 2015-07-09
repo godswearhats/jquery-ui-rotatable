@@ -1,4 +1,4 @@
-jquery-ui-rotatable is a plugin for jQuery UI that works in a similar way to Draggable and Resizable, without being as full-featured (please fork and send me pull requests!). By default, it puts a small rotation icon in the bottom left of whatever element you want to make rotatable. I chose that area because it was originally being used in [Herald](https://github.com/godswearhats/herald) and the elements in that project were also resizable and I didn't want to interfere with the bottom/right controls for that.
+jquery-ui-rotatable is a plugin for jQuery UI that works in a similar way to Draggable and Resizable, without being as full-featured (please fork and send me pull requests!). By default, it puts a small rotation icon in the bottom left of whatever element you want to make rotatable.
 
 ### Usage
 
@@ -6,8 +6,8 @@ Somewhere in your HTML ...
 
     <!-- prerequisites -->
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     
     <script src="jquery.ui.rotatable.js"></script>
     <!-- this is small and will allow you to override look/feel of handle -->
@@ -42,8 +42,8 @@ Options that can be set when you call `.rotatable()` are:
 * handle: url to a custom image for the handle
 * angle: the starting rotation for the element (default 0 degrees)
 * rotationCenterX, rotationCenterY: position about which the element will be rotated
-* steps: an angle in degrees that the rotation will snap to if the shift key is held (default 22.5)
-* snap: snaps to step in degrees, even if shift key is not held (default: false)
+* step: an angle in degrees that the rotation will snap to if the shift key is held (default 22.5)
+* snap: snaps to `step` in degrees (default: false)
 * start, stop, rotate: callbacks when those events occur
 
 The start, rotate and stop callbacks provide the following in the ui argument of the callback:
@@ -68,7 +68,7 @@ A simple demo is in the source code, but can be visited [here](http://godswearha
 
 ### Thanks
 
-Many thanks to those of you who have reported issues and helped me diagnose and fix them! Specifically, @thehunmonkgroup, @ssimono, @theodorton, @rouxguigui and @tremez
+Many thanks to those of you who have reported issues and helped me diagnose and fix them! Also, thank you to all the contributors who have sent pull requests and put up with my laziness :-)
 
 ### License
 

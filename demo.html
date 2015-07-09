@@ -1,8 +1,8 @@
 <html>
 <head>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	
 	<script src="jquery.ui.rotatable.min.js"></script>
 	<link rel="stylesheet" href="jquery.ui.rotatable.css">
@@ -21,16 +21,18 @@
             },
         };
         $('#target').rotatable(params);
-        $('#target2').rotatable(params); $('#draggable2').draggable();
-        $('#target3').resizable().rotatable(params); $('#draggable3').draggable();
+        $('#target2').rotatable(); $('#draggable2').draggable();
+        $('#target3').resizable().rotatable(); $('#draggable3').draggable();
         $('#target4').rotatable( {angle: 0.1} );
         $('#target5').rotatable( {handle: $(document.createElement('img')).attr('src', 'alternate_rotate.png')} );
+        $('#target6').rotatable( {snap: true} );
+		
 		});
 	</script>
 </head>
 <body>
 <div id="target" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px">
-  Rotate me!
+  Rotate me! (I have callbacks logging to the console)
 </div>
 <div id="draggable2">
     <div id="target2" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px">
@@ -47,6 +49,9 @@
 </div>
 <div id="target5" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
   I've got a custom handle.
+</div>
+<div id="target6" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
+  I snap every 22.5&deg;.
 </div>
 </body>
 </html>

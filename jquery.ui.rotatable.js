@@ -6,7 +6,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
         handle: false,
         angle: false,
         snap: false,
-        steps: 22.5,
+        step: 22.5,
 
         
         rotationCenterX: false, 
@@ -150,7 +150,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
             return false;
         }
         
-        var rotateAngle = this.getRotateAngle();
+        var rotateAngle = this.getRotateAngle(event);
 
         this.performRotation(rotateAngle);
         var previousRotateAngle = this.elementCurrentAngle;
@@ -184,7 +184,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
         return false;
     },
 
-    getRotateAngle: function(){
+    getRotateAngle: function(event){
 
         var center = this.getElementCenter();
         
@@ -199,7 +199,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
             var rotateDegrees = ( ( rotateAngle / Math.PI ) * 180 );
 
             //round to nearest step
-            rotateDegrees = Math.round( rotateDegrees / this.options.steps ) * this.options.steps;
+            rotateDegrees = Math.round( rotateDegrees / this.options.step ) * this.options.step;
 
             //convert it back to radians
             rotateAngle = ( rotateDegrees * Math.PI ) / 180;
