@@ -35,20 +35,32 @@ Somewhere in your HTML ...
     
     <div id="target">Rotate me!</div>
 
+
+  
+Options that can be set when you call `.rotatable()` are:
+
+* handle: url to a custom image for the handle
+* angle: the starting rotation for the element (default 0 degrees)
+* rotationCenterX, rotationCenterY: position about which the element will be rotated
+* steps: an angle in degrees that the rotation will snap to if the shift key is held (default 22.5)
+* snap: snaps to step in degrees, even if shift key is not held (default: false)
+* start, stop, rotate: callbacks when those events occur
+
 The start, rotate and stop callbacks provide the following in the ui argument of the callback:
+
 * element: The jQuery element being rotated.
 * angle: An object containing information about the rotation angle, with the following keys:
   * start: The angle at the begining of the rotation.
   * current: The current angle of the rotation.
   * stop: The angle at the end of the rotation.
 
-Note that you should probably define a height and width for anything that you make rotatable, as the rotation happens around the center point of the element, and when you don't define these things, it could look and feel a little a strange.
+Note that you should define a height and width for anything that you make rotatable, as the rotation happens around the center point of the element, and when you don't define these things, it could look and feel a little a strange. Alternatively, specify the center of rotation as mentioned earlier.
 
-You can also combine this plugin with the built-in `resizable()` and `draggable()`, although the latter works best when applied to a container with the rotatable inside it. See the Demo page for some examples.
+You can also combine this plugin with the jQuery UI built-in `resizable()` and `draggable()`, although the latter works best when applied to a container with the rotatable inside it. See the Demo page for some examples.
 
 You can disable/enable the rotation using `$('#target').rotatable('enable');` and `$('#target').rotatable('disable');`.
 
-Holding down the shift key while rotating will allow rotation at in 15 degree increments. Hovering over an element and rotating the scrollwheel (or equivalent) will cause the element to rotate.
+Hovering over an element and rotating the scrollwheel (or equivalent) will cause the element to rotate.
 
 ### Demo
 
