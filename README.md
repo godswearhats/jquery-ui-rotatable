@@ -51,6 +51,7 @@ Options that can be set when you call `.rotatable()` are:
 * step: an angle in degrees that the rotation will snap to if the shift key is held (default 22.5)
 * snap: snaps to `step` in degrees (default: false)
 * start, stop, rotate: callbacks when those events occur
+* wheelRotate: enable/disable mouse wheel to rotate element (default: true)
 
 The start, rotate and stop callbacks provide the following in the ui argument of the callback:
 
