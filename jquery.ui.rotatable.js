@@ -191,7 +191,6 @@ $.widget("ui.rotatable", $.ui.mouse, {
     },
 
     getRotateAngle: function(event){
-
         var center = this.getElementCenter();
         
         var xFromCenter = event.pageX - center[0];
@@ -199,8 +198,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
         var mouseAngle = Math.atan2(yFromCenter, xFromCenter);
         var rotateAngle = mouseAngle - this.mouseStartAngle + this.elementStartAngle;
 
-        if( this.options.snap ){
-
+        if (this.options.snap || event.shiftKey) {
             //convert radians to degrees
             var rotateDegrees = ( ( rotateAngle / Math.PI ) * 180 );
 
@@ -209,11 +207,9 @@ $.widget("ui.rotatable", $.ui.mouse, {
 
             //convert it back to radians
             rotateAngle = ( rotateDegrees * Math.PI ) / 180;
-
         }
 
         return rotateAngle;
-
     },
     
     wheelRotate: function(event) {
