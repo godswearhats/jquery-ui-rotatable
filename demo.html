@@ -4,7 +4,7 @@
 	<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
 	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	
-	<script src="jquery.ui.rotatable.min.js"></script>
+	<script src="jquery.ui.rotatable.js"></script>
 	<link rel="stylesheet" href="jquery.ui.rotatable.css">
 	
 	<script type="text/javascript">
@@ -26,6 +26,7 @@
         $('#target4').rotatable( {angle: 0.1} );
         $('#target5').rotatable( {handle: $(document.createElement('img')).attr('src', 'alternate_rotate.png')} );
         $('#target6').rotatable( {snap: true} );
+        $('#target7').rotatable( {wheelRotate: false} );
 		
 		});
 	</script>
@@ -52,6 +53,9 @@
 </div>
 <div id="target6" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
   I snap every 22.5&deg;.
+</div>
+<div id="target7" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
+  I don't rotate on wheel.
 </div>
 </body>
 </html>

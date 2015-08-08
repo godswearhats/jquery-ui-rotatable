@@ -5,6 +5,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
     options: {
         handle: false,
         angle: false,
+        wheelRotate: true,
         snap: false,
         step: 22.5,
 
@@ -65,7 +66,9 @@ $.widget("ui.rotatable", $.ui.mouse, {
             wheelRotate: $.proxy(this.wheelRotate, this)
         };
 
-        this.element.bind('wheel', this.listeners.wheelRotate);
+        if (this.options.wheelRotate) {
+            this.element.bind('wheel', this.listeners.wheelRotate);
+        }
 
         handle.draggable({ helper: 'clone', start: this.dragStart, handle: handle });
         handle.bind('mousedown', this.listeners.startRotate);
@@ -83,7 +86,10 @@ $.widget("ui.rotatable", $.ui.mouse, {
     _destroy: function() {
         this.element.removeClass('ui-rotatable');
         this.element.find('.ui-rotatable-handle').remove();
-        this.element.unbind('wheel', this.listeners.wheelRotate);
+
+        if (this.options.wheelRotate) {
+            this.element.unbind('wheel', this.listeners.wheelRotate);
+        }
     },
 
     performRotation: function(angle) {
