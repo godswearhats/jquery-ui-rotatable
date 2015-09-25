@@ -1,7 +1,7 @@
 jquery-ui-rotatable is a plugin for jQuery UI that works in a similar way to Draggable and Resizable, without being as full-featured (please fork and send me pull requests!). By default, it puts a small rotation icon in the bottom left of whatever element you want to make rotatable.
 
 ####CDN
-```
+```html
 <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.ui.rotatable/1.0.1/jquery.ui.rotatable.css">
 <script src="//cdn.jsdelivr.net/jquery.ui.rotatable/1.0.1/jquery.ui.rotatable.min.js"></script>
 ```
@@ -10,36 +10,38 @@ jquery-ui-rotatable is a plugin for jQuery UI that works in a similar way to Dra
 
 Somewhere in your HTML ...
 
-    <!-- prerequisites -->
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-    <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    
-    <script src="jquery.ui.rotatable.js"></script>
-    <!-- this is small and will allow you to override look/feel of handle -->
-    <link rel="stylesheet" href="jquery.ui.rotatable.css">
-    
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var params = {
-                // Callback fired on rotation start.
-                start: function(event, ui) {
-                },
-                // Callback fired during rotation.
-                rotate: function(event, ui) {
-                },
-                // Callback fired on rotation end.
-                stop: function(event, ui) {
-                },
-                // Set the rotation center at (25%, 75%).
-                rotationCenterX: 25.0, 
-                rotationCenterY: 75.0
-            };
-            $('#target').rotatable(params);
-        });
-    </script>
-    
-    <div id="target">Rotate me!</div>
+```html
+<!-- prerequisites -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script src="jquery.ui.rotatable.js"></script>
+<!-- this is small and will allow you to override look/feel of handle -->
+<link rel="stylesheet" href="jquery.ui.rotatable.css">
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var params = {
+            // Callback fired on rotation start.
+            start: function(event, ui) {
+            },
+            // Callback fired during rotation.
+            rotate: function(event, ui) {
+            },
+            // Callback fired on rotation end.
+            stop: function(event, ui) {
+            },
+            // Set the rotation center at (25%, 75%).
+            rotationCenterX: 25.0, 
+            rotationCenterY: 75.0
+        };
+        $('#target').rotatable(params);
+    });
+</script>
+
+<div id="target">Rotate me!</div>
+```
 
 
   
