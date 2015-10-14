@@ -1,6 +1,7 @@
 (function( $, undefined ) {
 
 $.widget("ui.rotatable", $.ui.mouse, {
+	widgetEventPrefix: "rotate",
 
     options: {
         handle: false,
