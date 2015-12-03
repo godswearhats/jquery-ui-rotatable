@@ -10,8 +10,8 @@ $.widget("ui.rotatable", $.ui.mouse, {
         snap: false,
         step: 22.5,
 
-        
-        rotationCenterX: false, 
+
+        rotationCenterX: false,
         rotationCenterY: false,
 
         // callbacks
@@ -33,7 +33,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
         }
         this.options.rotationCenterY = y;
     },
-    
+
     handle: function(handle) {
         if (handle === undefined) {
             return this.options.handle;
@@ -74,7 +74,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
         handle.draggable({ helper: 'clone', start: this.dragStart, handle: handle });
         handle.bind('mousedown', this.listeners.startRotate);
         handle.appendTo(this.element);
-        
+
         if(this.options.angle != false) {
             this.elementCurrentAngle = this.options.angle;
             this.performRotation(this.elementCurrentAngle);
@@ -97,9 +97,9 @@ $.widget("ui.rotatable", $.ui.mouse, {
         this.element.css('transform-origin', this.options.rotationCenterX + '% ' + this.options.rotationCenterY + '%');
         this.element.css('-ms-transform-origin', this.options.rotationCenterX + '% ' + this.options.rotationCenterY + '%'); /* IE 9 */
         this.element.css(
-          '-webkit-transform-origin', 
+          '-webkit-transform-origin',
           this.options.rotationCenterX + '% ' + this.options.rotationCenterY + '%'); /* Chrome, Safari, Opera */
-          
+
         this.element.css('transform','rotate(' + angle + 'rad)');
         this.element.css('-moz-transform','rotate(' + angle + 'rad)');
         this.element.css('-webkit-transform','rotate(' + angle + 'rad)');
@@ -126,7 +126,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
         var elementCentreX = elementOffset.left + (this.element.width() / 100) * this.options.rotationCenterX;
         var elementCentreY = elementOffset.top + (this.element.height() / 100) * this.options.rotationCenterY;
       }
-      
+
       return Array(elementCentreX, elementCentreY);
     },
 
@@ -156,7 +156,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
         if (!this.element || this.element.disabled) {
             return false;
         }
-        
+
         var rotateAngle = this.getRotateAngle(event);
 
         this.performRotation(rotateAngle);
@@ -193,31 +193,33 @@ $.widget("ui.rotatable", $.ui.mouse, {
 
     getRotateAngle: function(event){
         var center = this.getElementCenter();
-        
+
         var xFromCenter = event.pageX - center[0];
         var yFromCenter = event.pageY - center[1];
         var mouseAngle = Math.atan2(yFromCenter, xFromCenter);
         var rotateAngle = mouseAngle - this.mouseStartAngle + this.elementStartAngle;
 
         if (this.options.snap || event.shiftKey) {
-            //convert radians to degrees
-            var rotateDegrees = ( ( rotateAngle / Math.PI ) * 180 );
-
-            //round to nearest step
-            rotateDegrees = Math.round( rotateDegrees / this.options.step ) * this.options.step;
-
-            //convert it back to radians
-            rotateAngle = ( rotateDegrees * Math.PI ) / 180;
+          rotateAngle = this._calculateSnap(rotateAngle);
         }
 
         return rotateAngle;
     },
-    
+
     wheelRotate: function(event) {
         var angle = Math.round(event.originalEvent.deltaY/10) * Math.PI/180;
+        if (this.options.snap || event.shiftKey) {
+          angle = this._calculateSnap(angle);
+        }
         angle = this.elementCurrentAngle + angle;
         this.angle(angle);
         this._trigger("rotate", event, this.ui());
+    },
+
+    _calculateSnap: function(rotateAngle) {
+      var rotateDegrees = ((rotateAngle / Math.PI) * 180);
+      rotateDegrees = Math.round(rotateDegrees / this.options.step) * this.options.step;
+      return (rotateDegrees * Math.PI) / 180;
     },
 
     _propagate: function(n, event) {
