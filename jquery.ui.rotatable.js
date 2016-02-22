@@ -159,15 +159,28 @@ $.widget("ui.rotatable", $.ui.mouse, {
 
         var rotateAngle = this.getRotateAngle(event);
 
-        this.performRotation(rotateAngle);
         var previousRotateAngle = this.elementCurrentAngle;
         this.elementCurrentAngle = rotateAngle;
 
         // Plugins callbacks need to be called first.
         this._propagate("rotate", event);
 
+        if (this._propagate("rotate", event) === false ) {
+            this.elementCurrentAngle = previousRotateAngle;
+            return false;
+        }
+        var ui = this.ui();
+        if (this._trigger("rotate", event, ui ) === false) {
+            this.elementCurrentAngle = previousRotateAngle;
+            return false;
+        } else if (ui.angle.current != rotateAngle) {
+            rotateAngle = ui.angle.current;
+            this.elementCurrentAngle = rotateAngle;
+        }
+
+        this.performRotation(rotateAngle);
+
         if (previousRotateAngle != rotateAngle) {
-            this._trigger("rotate", event, this.ui());
             this.hasRotated = true;
         }
 
@@ -183,9 +196,8 @@ $.widget("ui.rotatable", $.ui.mouse, {
         $(document).unbind('mouseup', this.listeners.stopRotate);
 
         this.elementStopAngle = this.elementCurrentAngle;
-        if (this.hasRotated) {
-            this._propagate("stop", event);
-        }
+
+        this._propagate("stop", event);
 
         setTimeout( function() { this.element = false; }, 10 );
         return false;
