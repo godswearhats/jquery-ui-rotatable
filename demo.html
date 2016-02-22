@@ -27,6 +27,16 @@
         $('#target5').rotatable( {handle: $(document.createElement('img')).attr('src', 'alternate_rotate.png')} );
         $('#target6').rotatable( {snap: true} );
         $('#target7').rotatable( {wheelRotate: false} );
+        $('#target8').rotatable({
+          rotate: function(e, ui){
+
+            // contain angle between 0 and 180 degrees
+            var degrees = ui.angle.current * 180/Math.PI;
+            if ( degrees < 0 ) degrees += 360;
+            if ( degrees > 180 ) return false;
+
+          }
+        });
 		
 		});
 	</script>
@@ -56,6 +66,10 @@
 </div>
 <div id="target7" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
   I don't rotate on wheel.
+</div>
+<div id="target8" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px">
+  I only rotate between 0 and 180 degrees.
+</div>
 </div>
 </body>
 </html>
