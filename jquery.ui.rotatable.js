@@ -10,6 +10,10 @@ $.widget("ui.rotatable", $.ui.mouse, {
         snap: false,
         step: 22.5,
 
+        handle_offset: {
+            top: 0,
+            left: 0
+        },
 
         rotationCenterX: false,
         rotationCenterY: false,
@@ -73,7 +77,10 @@ $.widget("ui.rotatable", $.ui.mouse, {
 
         handle.draggable({ helper: 'clone', start: this.dragStart, handle: handle });
         handle.bind('mousedown', this.listeners.startRotate);
-        handle.appendTo(this.element);
+
+        if ( !handle.closest( this.element ).length ) {
+            handle.appendTo(this.element);
+        }
 
         if(this.options.angle != false) {
             this.elementCurrentAngle = this.options.angle;
@@ -138,8 +145,8 @@ $.widget("ui.rotatable", $.ui.mouse, {
 
     startRotate: function(event) {
         var center = this.getElementCenter();
-        var startXFromCenter = event.pageX - center[0];
-        var startYFromCenter = event.pageY - center[1];
+        var startXFromCenter = event.pageX - this.options.handle_offset.left - center[0];
+        var startYFromCenter = event.pageY - this.options.handle_offset.top - center[1];
         this.mouseStartAngle = Math.atan2(startYFromCenter, startXFromCenter);
         this.elementStartAngle = this.elementCurrentAngle;
         this.hasRotated = false;
@@ -206,8 +213,8 @@ $.widget("ui.rotatable", $.ui.mouse, {
     getRotateAngle: function(event){
         var center = this.getElementCenter();
 
-        var xFromCenter = event.pageX - center[0];
-        var yFromCenter = event.pageY - center[1];
+        var xFromCenter = event.pageX - this.options.handle_offset.left - center[0];
+        var yFromCenter = event.pageY - this.options.handle_offset.top - center[1];
         var mouseAngle = Math.atan2(yFromCenter, xFromCenter);
         var rotateAngle = mouseAngle - this.mouseStartAngle + this.elementStartAngle;
 
