@@ -73,7 +73,10 @@ $.widget("ui.rotatable", $.ui.mouse, {
 
         handle.draggable({ helper: 'clone', start: this.dragStart, handle: handle });
         handle.bind('mousedown', this.listeners.startRotate);
-        handle.appendTo(this.element);
+
+        if ( !handle.closest( this.element ).length ) {
+            handle.appendTo(this.element);
+        }
 
         if(this.options.angle != false) {
             this.elementCurrentAngle = this.options.angle;
