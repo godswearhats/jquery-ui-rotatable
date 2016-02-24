@@ -30,10 +30,15 @@
         $('#target8').rotatable({
           rotate: function(e, ui){
 
-            // contain angle between 0 and 180 degrees
             var degrees = ui.angle.current * 180/Math.PI;
             if ( degrees < 0 ) degrees += 360;
-            if ( degrees > 180 ) return false;
+
+            // contain angle between 0 and 180 degrees
+            if ( degrees > 270 ) {
+              ui.angle.current = 0;
+            } else if ( degrees > 180 ) {
+              ui.angle.current = Math.PI;
+            }
 
           }
         });
