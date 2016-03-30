@@ -160,7 +160,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
     },
 
     rotateElement: function(event) {
-        if (!this.element || this.element.disabled) {
+        if (!this.element || this.element.disabled || (!event.which) {
             return false;
         }
 
