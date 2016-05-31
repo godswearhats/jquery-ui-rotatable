@@ -1,7 +1,17 @@
-(function( $, undefined ) {
+(function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define([ "jquery" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+}(function( $, undefined ) {
 
 $.widget("ui.rotatable", $.ui.mouse, {
-	widgetEventPrefix: "rotate",
+    widgetEventPrefix: "rotate",
 
     options: {
         handle: false,
@@ -262,4 +272,6 @@ $.widget("ui.rotatable", $.ui.mouse, {
 
 });
 
-})(jQuery);
+return $.ui.rotatable;
+
+}));
