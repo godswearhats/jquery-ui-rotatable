@@ -163,11 +163,11 @@ $.widget("ui.rotatable", $.ui.mouse, {
         if (!this.element || this.element.disabled){
             return false;
         }
-		
-		if(!event.which){
-			this.stopRotate(event);
-			return false;
-		}
+
+        if(!event.which){
+            this.stopRotate(event);
+            return false;
+        }
 
         var rotateAngle = this.getRotateAngle(event);
 
