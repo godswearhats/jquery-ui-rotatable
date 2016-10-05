@@ -34,7 +34,12 @@ Somewhere in your HTML ...
             },
             // Set the rotation center at (25%, 75%).
             rotationCenterX: 25.0, 
-            rotationCenterY: 75.0
+            rotationCenterY: 75.0,
+            transforms: {
+                translate: '(50%, 50%)',
+                scale: '(2)'
+                //any other transforms
+            }
         };
         $('#target').rotatable(params);
     });
@@ -54,6 +59,7 @@ Options that can be set when you call `.rotatable()` are:
 * snap: snaps to `step` in degrees (default: false)
 * start, stop, rotate: callbacks when those events occur
 * wheelRotate: enable/disable mouse wheel to rotate element (default: true)
+* transforms: an object with css transforms you would like to apply to the rotatable element (except "rotate"). They will be applied on each rotation (default: NULL)
 
 The start, rotate and stop callbacks provide the following in the ui argument of the callback:
 
