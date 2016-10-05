@@ -17,7 +17,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
 
         rotationCenterX: false,
         rotationCenterY: false,
-				transforms: null,
+        transforms: null,
         // callbacks
         start: null,
         rotate: null,
