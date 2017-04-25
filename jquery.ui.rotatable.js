@@ -27,7 +27,7 @@ $.widget("ui.rotatable", $.ui.mouse, {
 
         rotationCenterX: false,
         rotationCenterY: false,
-
+        transforms: null,
         // callbacks
         start: null,
         rotate: null,
@@ -117,10 +117,25 @@ $.widget("ui.rotatable", $.ui.mouse, {
           '-webkit-transform-origin',
           this.options.rotationCenterX + '% ' + this.options.rotationCenterY + '%'); /* Chrome, Safari, Opera */
 
-        this.element.css('transform','rotate(' + angle + 'rad)');
-        this.element.css('-moz-transform','rotate(' + angle + 'rad)');
-        this.element.css('-webkit-transform','rotate(' + angle + 'rad)');
-        this.element.css('-o-transform','rotate(' + angle + 'rad)');
+        var transforms = 'rotate(' + angle + 'rad)';
+
+        if(this.options.transforms)
+            transforms  += ' ' + function(transforms){
+
+                var t = [];
+
+                for(var i in transforms)
+                    if(transforms.hasOwnProperty(i) && transforms[i])
+                        t.push(i+'(' + transforms[i] + ')');
+
+                return t.join(' ');
+
+            }(this.options.transforms);
+
+        this.element.css('transform',transforms);
+        this.element.css('-moz-transform',transforms);
+        this.element.css('-webkit-transform',transforms);
+        this.element.css('-o-transform',transforms);
     },
 
     getElementOffset: function() {
