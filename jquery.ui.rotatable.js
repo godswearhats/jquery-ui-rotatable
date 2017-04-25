@@ -145,21 +145,41 @@ $.widget("ui.rotatable", $.ui.mouse, {
         return offset;
     },
 
+    _calculateElementCenter: function() {
+        var elementOffset = this.getElementOffset();
+
+        // Rotation center given via options
+        if (this.options.rotationCenterX !== false) {
+            return Array(
+                elementOffset.left + (this.element.width() / 100) * this.options.rotationCenterX,
+                elementOffset.top + (this.element.height() / 100) * this.options.rotationCenterY
+            );
+        }
+
+        // Deduce rotation center from transform-origin
+        if ( this.element.css('transform-origin') != undefined ) {
+            var originPx = this.element.css('transform-origin').match(/([\d\.]+)px +([\d\.]+)px/)
+            if ( originPx != null ) {
+                return Array(
+                    elementOffset.left + parseFloat(originPx[1]),
+                    elementOffset.top + parseFloat(originPx[2])
+                );
+            }
+        }
+
+        // Default rotation center: middle of the element
+        return Array(
+            elementOffset.left + this.element.width() / 2,
+            elementOffset.top + this.element.height() / 2
+        );
+    },
+
     getElementCenter: function() {
-      var elementOffset = this.getElementOffset();
-
-      if(this.options.rotationCenterX === false)
-      {
-        var elementCentreX = elementOffset.left + this.element.width() / 2;
-        var elementCentreY = elementOffset.top + this.element.height() / 2;
-      }
-      else
-      {
-        var elementCentreX = elementOffset.left + (this.element.width() / 100) * this.options.rotationCenterX;
-        var elementCentreY = elementOffset.top + (this.element.height() / 100) * this.options.rotationCenterY;
-      }
-
-      return Array(elementCentreX, elementCentreY);
+        if ( this.elementCenter == null ) {
+            this.elementCenter = this._calculateElementCenter();
+        }
+        
+        return this.elementCenter;
     },
 
     dragStart: function(event) {
