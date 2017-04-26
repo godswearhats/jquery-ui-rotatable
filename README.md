@@ -2,8 +2,8 @@ jquery-ui-rotatable is a plugin for jQuery UI that works in a similar way to Dra
 
 #### CDN
 ```html
-<link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.ui.rotatable/1.0.1/jquery.ui.rotatable.css">
-<script src="//cdn.jsdelivr.net/jquery.ui.rotatable/1.0.1/jquery.ui.rotatable.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.ui.rotatable/1.1/jquery.ui.rotatable.css">
+<script src="//cdn.jsdelivr.net/jquery.ui.rotatable/1.1/jquery.ui.rotatable.min.js"></script>
 ```
 
 ### Usage
@@ -79,11 +79,11 @@ You can also combine this plugin with the jQuery UI built-in `resizable()` and `
 
 You can disable/enable the rotation using `$('#target').rotatable('enable');` and `$('#target').rotatable('disable');`.
 
-Hovering over an element and rotating the scrollwheel (or equivalent) will cause the element to rotate.
+Hovering over an element and rotating the scroll wheel (or equivalent) will cause the element to rotate.
 
 ### Demo
 
-A simple demo is in the source code, but can be visited [here](http://godswearhats.com/jquery-ui-rotatable/demo.html).
+A simple demo is in the source code, but can be visited [here](http://godswearhats.com/jquery-ui-rotatable/demo.html). Note that the minified version only gets updated at release time.
 
 ### Thanks
 
