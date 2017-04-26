@@ -92,7 +92,7 @@
       var previousRotateAngle = this.elementCurrentAngle
       this.elementCurrentAngle = rotateAngle
 
-        // Plugins callbacks need to be called first.
+      // Plugins callbacks need to be called first.
       this._propagate('rotate', event)
 
       if (this._propagate('rotate', event) === false) {
@@ -170,6 +170,7 @@
         angle: {
           start: this.elementStartAngle,
           current: this.elementCurrentAngle,
+          degrees: this._angleInDegrees(this.elementCurrentAngle),
           stop: this.elementStopAngle
         }
       }
@@ -183,7 +184,7 @@
 
     // calculates the degrees for a given angle in radians
     _angleInDegrees: function (radians) {
-      return radians * 180 / Math.PI
+      return Math.abs(radians) * 180 / Math.PI
     },
 
     // calculates the center of the element
