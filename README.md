@@ -68,7 +68,7 @@ The start, rotate and stop callbacks provide the following in the ui argument of
 
 * `element`: The jQuery element being rotated.
 * `angle`: An object containing information about the rotation angle, with the following keys:
-  * `start`: The angle at the begining of the rotation.
+  * `start`: The angle at the beginning of the rotation.
   * `current`: The current angle of the rotation in radians.
   * `degrees`: The current angle of the rotation in degrees.
   * `stop`: The angle at the end of the rotation.
