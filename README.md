@@ -69,7 +69,8 @@ The start, rotate and stop callbacks provide the following in the ui argument of
 * `element`: The jQuery element being rotated.
 * `angle`: An object containing information about the rotation angle, with the following keys:
   * `start`: The angle at the begining of the rotation.
-  * `current`: The current angle of the rotation.
+  * `current`: The current angle of the rotation in radians.
+  * `degrees`: The current angle of the rotation in degrees.
   * `stop`: The angle at the end of the rotation.
 
 Note that you should define a height and width for anything that you make rotatable, as the rotation happens around the center point of the element, and when you don't define these things, it could look and feel a little a strange. Alternatively, specify the center of rotation as mentioned earlier.
