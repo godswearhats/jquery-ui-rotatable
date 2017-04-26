@@ -79,7 +79,7 @@
 
     // listener for rotating the element
     rotateElement: function (event) {
-      if (!this.element || this.element.disabled) {
+      if (!this.element || this.element.disabled || this.options.disabled) {
         return false
       }
 
