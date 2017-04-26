@@ -3,46 +3,50 @@
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 	<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
 	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	
+
 	<script src="jquery.ui.rotatable.js"></script>
 	<link rel="stylesheet" href="jquery.ui.rotatable.css">
-	
+
 	<script type="text/javascript">
 		$(document).ready(function() {
         var params = {
             start: function(event, ui) {
-                console.log("Rotating started");
+                console.log("Rotating started")
             },
             rotate: function(event, ui) {
-                console.log("Rotating");
+                if (Math.abs(ui.angle.current > 6)) {
+                  console.log("Rotating " + ui.angle.current)
+                }
             },
             stop: function(event, ui) {
-                console.log("Rotating stopped");
+                console.log("Rotating stopped")
             },
         };
-        $('#target').rotatable(params);
-        $('#target2').rotatable(); $('#draggable2').draggable();
-        $('#target3').resizable().rotatable(); $('#draggable3').draggable();
-        $('#target4').rotatable( {angle: 0.1} );
-        $('#target5').rotatable( {handle: $(document.createElement('img')).attr('src', 'alternate_rotate.png')} );
-        $('#target6').rotatable( {snap: true} );
-        $('#target7').rotatable( {wheelRotate: false} );
+        $('#target').rotatable(params)
+        $('#target2').rotatable(); $('#draggable2').draggable()
+        $('#target3').resizable().rotatable(); $('#draggable3').draggable()
+        $('#target4').rotatable( {angle: 0.1} )
+        $('#target5').rotatable( {handle: $(document.createElement('img')).attr('src', 'alternate_rotate.png')} )
+        $('#target5-1').rotatable( {handleOffset: {left: 200}} )
+        $('#target6').rotatable( {snap: true} )
+        $('#target7').rotatable( {wheelRotate: false} )
         $('#target8').rotatable({
           rotate: function(e, ui){
 
-            var degrees = ui.angle.current * 180/Math.PI;
-            if ( degrees < 0 ) degrees += 360;
+            var degrees = ui.angle.current * 180/Math.PI
+            if ( degrees < 0 ) degrees += 360
 
             // contain angle between 0 and 180 degrees
             if ( degrees > 270 ) {
-              ui.angle.current = 0;
+              ui.angle.current = 0
             } else if ( degrees > 180 ) {
-              ui.angle.current = Math.PI;
+              ui.angle.current = Math.PI
             }
 
           }
         });
-		
+        $('#target9').rotatable( {transforms: {scaleY: 2}} )
+        $('#target10').rotatable( {rotationCenterOffset: {left: 250}})
 		});
 	</script>
 </head>
@@ -53,7 +57,7 @@
 <div id="draggable2">
     <div id="target2" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px">
       Drag me and rotate me!
-    </div>    
+    </div>
 </div>
 <div id="draggable3">
     <div id="target3" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px;">
@@ -66,14 +70,23 @@
 <div id="target5" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
   I've got a custom handle.
 </div>
+<div id="target5-1" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
+  My handle has been offset
+</div>
 <div id="target6" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
   I snap every 22.5&deg;.
 </div>
 <div id="target7" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px; margin-top: 20px">
   I don't rotate on wheel.
 </div>
-<div id="target8" style="width: 250px; border: 1px solid #862dde; padding: 20px; padding-right: 40px">
+<div id="target8" style="width: 250px; border: 1px solid #862dde; padding: 20px; margin-bottom: 40px">
   I only rotate between 0 and 180 degrees.
+</div>
+<div id="target9" style="width: 250px; border: 1px solid #862dde; padding: 0px; padding-right: 40px">
+  I have a scaleY(2) transform applied to me
+</div>
+<div id="target10" style="width: 250px; border: 1px solid #862dde; padding: 20px; margin-top: 40px">
+  My rotation center has been offset to on my far right!
 </div>
 </div>
 </body>
