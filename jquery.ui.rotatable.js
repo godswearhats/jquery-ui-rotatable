@@ -170,7 +170,7 @@
         angle: {
           start: this.elementStartAngle,
           current: this.elementCurrentAngle,
-          degrees: this._angleInDegrees(this.elementCurrentAngle),
+          degrees: Math.abs(this._angleInDegrees(this.elementCurrentAngle)),
           stop: this.elementStopAngle
         }
       }
@@ -184,7 +184,7 @@
 
     // calculates the degrees for a given angle in radians
     _angleInDegrees: function (radians) {
-      return Math.abs(radians) * 180 / Math.PI
+      return radians * 180 / Math.PI
     },
 
     // calculates the center of the element
