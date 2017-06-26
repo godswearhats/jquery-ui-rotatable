@@ -277,7 +277,9 @@
       if (this.options.degrees) {
         this.elementCurrentAngle = this._angleInRadians(this.options.degrees)
       }
-      this.elementCurrentAngle = this.options.radians || this.options.angle || 0
+      else {
+        this.elementCurrentAngle = this.options.radians || this.options.angle || 0
+      }
       this._performRotation(this.elementCurrentAngle)
     },
 
