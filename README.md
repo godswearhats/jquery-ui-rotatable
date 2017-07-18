@@ -32,9 +32,11 @@ Somewhere in your HTML ...
             // Callback fired on rotation end.
             stop: function(event, ui) {
             },
-            // Set the rotation center at (25%, 75%).
-            rotationCenterX: 25.0,
-            rotationCenterY: 75.0,
+            // Set the rotation center
+            rotationCenterOffset: {
+                top: 20px,
+                left: 20px
+            },
             transforms: {
                 translate: '(50%, 50%)',
                 scale: '(2)'
