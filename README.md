@@ -34,8 +34,8 @@ Somewhere in your HTML ...
             },
             // Set the rotation center
             rotationCenterOffset: {
-                top: 20px,
-                left: 20px
+                top: 20,
+                left: 20
             },
             transforms: {
                 translate: '(50%, 50%)',
