@@ -2,7 +2,7 @@
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define([ 'jquery' ], factory)
+    define(['jquery'], factory)
   } else {
     // Browser globals
     factory(jQuery)
@@ -45,10 +45,7 @@
 
     // calculates the element center if needed and returns it
     getElementCenter: function () {
-      if (this.elementCenter == null) {
-        this.elementCenter = this._calculateElementCenter()
-      }
-
+      this.elementCenter = this._calculateElementCenter()
       return this.elementCenter
     },
 
@@ -176,7 +173,7 @@
       }
     },
 
-/* *********************** private functions ************************** */
+    /* *********************** private functions ************************** */
     // calculates the radians for a given angle in degrees
     _angleInRadians: function (degrees) {
       return degrees * Math.PI / 180
