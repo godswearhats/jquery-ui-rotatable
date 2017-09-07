@@ -2,8 +2,8 @@ jquery-ui-rotatable is a plugin for jQuery UI that works in a similar way to Dra
 
 #### CDN
 ```html
-<link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.ui.rotatable/1.1/jquery.ui.rotatable.css">
-<script src="//cdn.jsdelivr.net/jquery.ui.rotatable/1.1/jquery.ui.rotatable.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/godswearhats/jquery-ui-rotatable@1.1/jquery.ui.rotatable.css">
+<script src="https://cdn.jsdelivr.net/gh/godswearhats/jquery-ui-rotatable@1.1/jquery.ui.rotatable.min.js"></script>
 ```
 
 ### Usage
