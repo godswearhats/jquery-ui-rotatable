@@ -150,6 +150,10 @@
 
     // listener for mousewheel rotation
     wheelRotate: function (event) {
+      if (!this.element || this.element.disabled || this.options.disabled) {
+        return
+      }
+      event.preventDefault()
       var angle = this._angleInRadians(Math.round(event.originalEvent.deltaY / 10))
       if (this.options.snap || event.shiftKey) {
         angle = this._calculateSnap(angle)
