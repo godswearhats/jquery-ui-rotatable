@@ -171,7 +171,7 @@
         angle: {
           start: this.elementStartAngle,
           current: this.elementCurrentAngle,
-          degrees: Math.abs(this._angleInDegrees(this.elementCurrentAngle)),
+          degrees: this._angleInDegrees(this.elementCurrentAngle),
           stop: this.elementStopAngle
         }
       }
