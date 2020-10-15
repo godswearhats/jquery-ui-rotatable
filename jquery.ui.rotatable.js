@@ -171,7 +171,7 @@
         angle: {
           start: this.elementStartAngle,
           current: this.elementCurrentAngle,
-          degrees: this._angleInDegrees(this.elementCurrentAngle),
+          degrees: this._normalizeDegrees(this._angleInDegrees(this.elementCurrentAngle)),
           stop: this.elementStopAngle
         }
       }
@@ -186,6 +186,10 @@
     // calculates the degrees for a given angle in radians
     _angleInDegrees: function (radians) {
       return radians * 180 / Math.PI
+    },
+
+    _normalizeDegrees: function (degrees) {
+      return ((degrees % 360) + 360) % 360;
     },
 
     // calculates the center of the element
