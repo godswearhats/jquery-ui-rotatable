@@ -38,8 +38,8 @@ Somewhere in your HTML ...
                 left: 20
             },
             transforms: {
-                translate: '(50%, 50%)',
-                scale: '(2)'
+                translate: '50%, 50%',
+                scale: '2'
                 //any other transforms
             }
         };
